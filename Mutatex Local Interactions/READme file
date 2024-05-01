@@ -1,1 +1,28 @@
+Assesing Local Interactions CDK8 - CycC:
+Process 5XS2 pdb file in Pymol (using the command line) :
+1.remove solvent (this specific molecule has water as solvent and we removed it)
+2.split_chains (the chains are splitted to chains A and B, A is CDK8 and B is cyclinC
+3.remove hetatm ( to remove glycerol and carboximide, Foldx can not work without this)
+4.file --> export structure --> export molecule --> save as pdb file (5XS2_nohet.pdb)
 
+In the linux command line:
+make new folder : mkdir Anny3
+1.copy all the mutatex essential files from mutatex folder in exercise 5 in the server, while being in the directory of interest, in this case Anny3:
+cp /home/projects/22117_proteins/lecture5_exercise/mutatex_templates/mutatex/templates/foldxsuite5/mutate_runfile_template.txt .
+cp /home/projects/22117_proteins/lecture5_exercise/mutatex_templates/mutatex/templates/foldxsuite5/repair_runfile_template.txt .
+cp /home/projects/22117_proteins/lecture5_exercise/mutatex_templates/mutatex/templates/foldxsuite5/interface_runfile_template.txt .
+cp /home/projects/22117_proteins/lecture5_exercise/mutatex_templates/mutatex/templates/mutation_list.txt .
+
+2.upload 5XS2_nohet.pdb
+3.make position list, which shows which positions will be mutated : posnew.txt
+This was made using the command nano posnew.txt, each amino acid to be mutated has to be specified, otherwise it will be a whole protein scan.
+The position is specified by: one letter code of the amino acid, the chain in which the amino acid is situated and the residue number, for example for alanine in chain A position 234, we would write : AA234.
+
+Once all the folders are uploaded on the directory of interest mutatex was runned by the command:
+nohup mutatex 5XS2_nohet.pdb -p 2 -m mutation_list.txt -x /home/ctools/foldx5_2024/foldx -f suite5 -R repair_runfile_template.txt -M mutate_runfile_template.txt -q posnew.txt -L -l -v -C  none -B  -I interface_runfile_template.txt &
+Subsequently run:
+tail -f nohup.out to monitor the progress, once the message All done! appears the results can be processed:
+1. Creation of a ΔΔG csv file :
+/home/ctools/anaconda3_2021.11/bin/ddg2excel -p 5XS2_nohet.pdb -l mutation_list.txt -q posnew.txt -d results/interface_ddgs/final_averages/A-B/ -F csv
+2. Creation of a heatmap:
+/home/ctools/anaconda3_2021.11/bin/ddg2heatmap -p 5XS2_nohet.pdb -l mutation_list.txt -q posnew.txt -d results/interface_ddgs/final_averages/A-B/
