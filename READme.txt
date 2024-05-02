@@ -1,3 +1,7 @@
+PDB Miner
+
+Docking (CDK8-carboximide)
+
 Assesing Local Interactions CDK8 - CycC:
 Process 5XS2 pdb file in Pymol (using the command line) :
 1.remove solvent (this specific molecule has water as solvent and we removed it)
