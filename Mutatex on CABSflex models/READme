@@ -43,7 +43,7 @@ Once the mutatex stops running an excel file with free energies and a heatmap we
 /home/ctools/anaconda3_2021.11/bin/ddg2excel -p mergemodels.pdb -l mutation_list.txt -q posnew.txt -d results/interface_ddgs/final_averages/A-B/ -F csv
 2. For the heatmap, modified to have maximum 14 and minimum -5 , for comparison reasons with previous results
 /home/ctools/anaconda3_2021.11/bin/ddg2heatmap -p mergemodels.pdb -x 14 -n -5 -l mutation_list.txt -q posnew.txt -d results/interface_ddgs/final_averages/A-B/ -F csv
-You can find the Mutatex files in this path: /home/projects/22117_proteins/projects/group9/EnsembleMutatex/nikolas
+You can find the Mutatex files for stability and local interactions in this path: /home/projects/22117_proteins/projects/group9/EnsembleMutatex/nikolas
 
 
 
