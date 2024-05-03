@@ -53,7 +53,18 @@ tail -f nohup.out to monitor the progress, once the message All done! appears th
 /home/ctools/anaconda3_2021.11/bin/ddg2heatmap -p 5XS2_nohet.pdb -l mutation_list.txt -q posnew.txt -d results/interface_ddgs/final_averages/A-B/
 
 
+Using mutatex assess the effects of mutations on stability
+check the location of the residues by NACESS using 2XWRA_nonHOH.pdb:
+/home/ctools/naccess-2.1.1/naccess 2XWRA_nonHOH.pdb
+creat a position list file:
 
+using 5XS2non-HOH.pdb              mutation_list.txt  repair_runfile_template.txt
+mutate_runfile_template.txt      poslist.txt run FoldX:
+nohup mutatex 5XS2non-HOH.pdb -p 4 -m mutation_list.txt -x /home/ctools/foldx5_2024/foldx -f suite5 -R repair_runfile_template.txt -M mutate_runfile_template.txt -q poslist.txt -L -l -v -C none &
+PID [1] 2163295
+downloaded the repaired file compare it to the initial model using PyMOL and using the sticks visualization. 
+check the stability of a protein on 
+/home/projects/22117_proteins/projects/group9/Sun/mutatex_stability/repair/repair_5XS2non-HOH_model0_checked$ grep Ttal FoldXrun.log
 
 
 
