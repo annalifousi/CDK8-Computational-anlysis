@@ -1,0 +1,24 @@
+Working structure retrieved from RCBS: 5cs2.pdb (CDK8-CYCC IN COMPLEX WITH COMPOUND 17:3-chloro-4-(4-pyridyl)-1H-pyrrole-2-carboxamide)
+
+# Remove solvent from pdb
+# Remove chain and ligands in complex (CYCC, 8D6 and Glycerol) 
+
+# Analyse ligand binding 
+# Distancs are calculated for residues within 4Å, exluding vdw interactions. 
+# Select polar contacts (hydrogen bonds)
+
+# Pyridine nitrogen atom hydrogen bonnds with Ala100 (in hinge region) (2.9Å) 
+# Primary amide forms hydrogen bond with Asp173 (2.8Å)
+# Carboxyl forms bond with Lys 52 (2.8 Å)
+
+
+# Run with distance restraints
+nohup CABSflex -i 5xs2_A_noHOH.pdb -k 10 -y 30 -a 10 -v 3 -z 10 -A --sc-rest-add 52:A 173:A 3.8 1.0 --sc-rest-add 52:A 100:A 10.7 1.0 --sc-rest-add 100:A 173:A 10.6 1.0 >& log1 &
+
+# Run without distance restraints to ligand
+nohup CABSfelx -i 5xs2_A_noHOH.pdb -k 10 -y 30 -a 10 -v 3 -z 10 -A
+
+# Make structural comparison of flexibility in pymol
+> align, all to this (*/CA)
+> Setting > Cartoon > Smooth loops
+> Action > assign sec. structure.
